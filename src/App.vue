@@ -35,6 +35,7 @@
                 response = response.body;
                 if (response.errno === ERR_OK) {
                     this.seller = response.data;
+                    console.log(this.seller)
                 }
             });
         },
@@ -48,7 +49,7 @@
 
 <style>
     @import '../static/css/reset.css';
-    /*设置的dpi，1px的线，实现缩放功能*/
+    /*设置的dpi，1px的线，实现缩放的功能*/
     
     @media(-webkit-min-device-pixel-ratio:1.5),
     (min-device-pixel-ratio:1.5) {

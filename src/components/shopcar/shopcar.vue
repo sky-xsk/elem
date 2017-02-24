@@ -1,6 +1,6 @@
 <template>
   <div class="shopcart">
-    <div class="contents">
+    <div class="contents" @click="tooglelist">
         <div class="contentleft">
             <div class="logo-wrapper">
                 <div class="logoq" :class="{'lights':totalCount>0}">
@@ -13,25 +13,53 @@
              <div class="priced" :class="{'gao':totalPrice>0}">￥{{totalPrice}}</div>
              <div class="descss">另需配送费￥{{deliveryPrice}}元</div>
         </div>
-        <div class="contentlright">
+        <div class="contentlright" @click.stop.prevent="paysd">
             <div class="pay" :class="payclass">{{paydesc}}</div>
         </div>
     </div>
+
+<transition name="fold">
+    <div class="shopcart-list" v-show="listshow" transition="fold">
+        <div class="list-head">
+            <h1 class="list-title">购物车</h1>
+            <span class="list-empty" @click="enptys">清空</span>
+        </div>
+         <div class="list-content" ref="listcontent">
+             <ul>
+                 <li class="list-food" v-for="food in selectFoods">
+                     <span class="list_name">{{food.name}}</span>
+                     <div class="list-price">
+                         <span>￥{{food.price*food.count}}</span>
+                     </div>
+                     <div class="cartss-wrapper">
+                        <carcount :food="food"></carcount>
+                     </div>
+                 </li>
+             </ul>
+         </div>
+    </div>
+</transition>
+<transition name="fades">
+    <div class="list_mask" v-show="listshow" @click="hidelist"></div>
+</transition>
   </div>
 </template>
 
 <script>
+    import BScroll from 'better-scroll';
+    import carcount from '../carcount/carcount.vue';
     export default {
         props: {
             selectFoods: {
                 type: Array,
                 default () {
                     return [{
-                        price: 10,
-                        count: 1
+                        price: 0,
+                        count: 0
                     }];
                 }
             },
+
             deliveryPrice: {
                 type: Number,
                 default: 0
@@ -41,7 +69,37 @@
                 default: 0
             }
         },
+        components: {
+            carcount
+        },
+
+        data() {
+            return {
+                fold: true,
+            };
+        },
         computed: {
+            listshow() {
+                if (!this.totalCount) {
+                    this.fold = true;
+                    return false;
+                }
+                let show = !this.fold;
+                if (show) {
+                    this.$nextTick(() => {
+                        if (!this.listcontent) {
+                            this.listcontent = new BScroll(this.$refs.listcontent, {
+                                click: true
+                            });
+                        } else {
+                            this.listcontent.refresh();
+                        }
+
+                    });
+                }
+                return show;
+            },
+
             totalPrice() {
                 let total = 0;
                 this.selectFoods.forEach((food) => {
@@ -75,11 +133,138 @@
                     return `enough`;
                 }
             },
-        }
+        },
+        methods: {
+            tooglelist() {
+                if (!this.totalCount) {
+                    return;
+                }
+                this.fold = !this.fold;
+            },
+            enptys() {
+                this.selectFoods.forEach((food) => {
+                    food.count = 0;
+                });
+            },
+            hidelist() {
+                this.fold = true;
+            },
+            paysd() {
+                if (this.totalPrice < this.minPrice) {
+                    return;
+                }
+                window.alert(`支付${this.totalPrice}元`);
+            }
+        },
     }
 </script>
 
 <style>
+    .shopcart-list {
+        position: absolute;
+        bottom: 48px;
+        z-index: -1;
+        left: 0;
+        width: 100%;
+    }
+    
+    .list_mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3;
+        opacity: 0.3;
+        background: #000;
+        backdrop-filter: blur(10px);
+        transition: all .3s ease;
+    }
+    
+    .fades-enter-active {
+        opacity: 0.3;
+    }
+    
+    .fades-leave-active {
+        opacity: 0;
+    }
+    
+    .fades-enter,
+    .fades-leave-active {
+        opacity: 0.3;
+    }
+    
+    .fold-enter-active {
+        transition: all .3s ease;
+    }
+    
+    .fold-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    
+    .fold-enter,
+    .fold-leave-active {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    
+    .list-head {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 18px;
+        background: #f3f5f7;
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    }
+    
+    .list-title {
+        float: left;
+        font-size: 14px;
+        color: rgb(7, 17, 27);
+    }
+    
+    .list-empty {
+        float: right;
+        font-size: 12px;
+        color: rgb(0, 160, 200);
+    }
+    
+    .list-content {
+        padding: 0 18px;
+        max-height: 217px;
+        background: #fff;
+        overflow: hidden;
+    }
+    
+    .list-food {
+        position: relative;
+        padding: 12px 0;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    }
+    
+    .list_name {
+        line-height: 24px;
+        font-size: 14px;
+        color: rgb(7, 17, 27);
+    }
+    
+    .list-price {
+        position: absolute;
+        right: 90px;
+        bottom: 12px;
+        line-height: 24px;
+        font-size: 14px;
+        font-weight: 700;
+        color: rgb(240, 20, 20);
+    }
+    
+    .cartss-wrapper {
+        position: absolute;
+        right: 0;
+        bottom: 6px;
+        line-height: 24px;
+    }
+    
     .numss {
         position: absolute;
         top: 0;

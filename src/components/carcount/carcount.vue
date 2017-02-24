@@ -1,7 +1,7 @@
 <template>
   <div class="carcount">
        <transition name="move">
-       <div class="cart-decrase" v-show="food.count>0" @click="decrase($event)">
+       <div class="cart-decrase" v-show="food.count>0" @click="decrase($event)" transition="move">
            <span class="inner">-</span>
         </div>
        </transition> 
@@ -19,7 +19,6 @@
             }
         },
         methods: {
-            //增加 同时判断event
             addcart(event) {
                 if (!event._constructed) {
                     return;
@@ -29,7 +28,6 @@
                 } else {
                     this.food.count++;
                 }
-
             },
 
             decrase(event) {
@@ -60,17 +58,22 @@
         border-radius: 50%;
         font-size: 20px;
         color: #fff;
-        transition: all 0.4s linear;
         transform: rotate(0);
     }
     
-    .move-transition {
+    .move-enter-active {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
     
+    .move-leave-active {
+        opacity: 0;
+        transform: translate3d(24px, 0, 0);
+        transform: rotate(180deg);
+    }
+    
     .move-enter,
-    .move-leave {
+    .move-leave-active {
         opacity: 0;
         transform: translate3d(24px, 0, 0);
         transform: rotate(180deg);

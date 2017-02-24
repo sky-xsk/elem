@@ -35,14 +35,13 @@
                                     <carcount :food="food"></carcount>
                                 </div>
 
-
                             </div>    
                         </li>    
                     </ul> 
                 </li>
             </ul>
         </div>
-        <shop :delivery-price="seller.deliveryPrice" :min-price = "seller.minPrice"></shop>
+        <shop  :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price = "seller.minPrice"></shop>
   </div>
 </template>
 
@@ -61,6 +60,7 @@
             shop,
             carcount
         },
+
         data() {
             return {
                 goods: [],
@@ -79,7 +79,20 @@
                     }
                 }
                 return 0;
-            }
+            },
+
+            selectFoods() {
+                let foods = [];
+                this.goods.forEach((good) => {
+                    good.foods.forEach((food) => {
+                        if (food.count) {
+                            foods.push(food);
+                        }
+                    });
+                });
+                return foods;
+            },
+
         },
 
         created() {
@@ -105,7 +118,6 @@
                 let foodList = this.$refs.foodswapper.getElementsByClassName('food-list-hook');
                 let el = foodList[index];
                 this.foodsScroll.scrollToElement(el, 500);
-
             },
 
             scrollsq() {
