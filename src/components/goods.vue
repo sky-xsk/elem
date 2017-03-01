@@ -14,7 +14,7 @@
                 <li v-for="item in goods" class="foodlist food-list-hook">
                     <h1 class="titles">{{item.name}}</h1>
                     <ul>
-                        <li v-for="food in item.foods" class="food-item">
+                        <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item">
                             <div class="iconq">
                                 <img :src="food.icon" width="57" height="57">    
                             </div>
@@ -42,13 +42,18 @@
             </ul>
         </div>
         <shop  :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price = "seller.minPrice"></shop>
+        <food :food="selectedFood" ref="foodd"></food>
   </div>
+
+     
+
 </template>
 
 <script>
     import BScroll from 'better-scroll';
     import shop from './shopcar/shopcar.vue';
     import carcount from './carcount/carcount.vue';
+    import food from './food/food.vue';
     const ERR_OK = 0;
     export default {
         props: {
@@ -58,7 +63,8 @@
         },
         components: {
             shop,
-            carcount
+            carcount,
+            food
         },
 
         data() {
@@ -66,6 +72,7 @@
                 goods: [],
                 listheight: [],
                 scrollY: 0,
+                selectedFood: {},
 
             };
         },
@@ -110,6 +117,15 @@
         },
 
         methods: {
+
+            selectFood(food, event) {
+                if (!event._constructed) {
+                    return;
+                };
+                this.selectedFood = food;
+                this.$refs.foodd.show();
+            },
+
             //点击滑动
             selectMenu(index, event) {
                 if (!event._constructed) {
