@@ -20,19 +20,19 @@
                     <li class="xblock">
                         <h2>起送价</h2>
                         <div class="xcontent">
-                            <span class="xstress">{{seller.minPrice}}元</span>
+                            <span class="xstress">{{seller.minPrice}}<i>元</i></span>
                         </div>
                     </li>
                      <li class="xblock">
                         <h2>商家培送</h2>
                         <div class="xcontent">
-                            <span class="xstress">{{seller.deliveryPrice}}元</span>
+                            <span class="xstress">{{seller.deliveryPrice}}<i>元</i></span>
                         </div>
                     </li>
                      <li class="xblock">
                         <h2>平均配送时间</h2>
                         <div class="xcontent">
-                            <span class="xstress">{{seller.deliveryTime}}分钟</span>
+                            <span class="xstress">{{seller.deliveryTime}}<i>元</i></span>
                         </div>
                     </li>
                 </ul>
@@ -132,8 +132,8 @@
 
          toggleFavorite(event) {
             if (!event._constructed) {
-             return;
-        }
+                return;
+            }
         this.favorite = !this.favorite;
         saveToLocal(this.seller.id, 'favorite', this.favorite);
       },
@@ -215,7 +215,7 @@
     .xstress {
         font-size: 24px
     }
-    
+    .xstress i{font-size: 14px; color: #999; font-style: normal; padding-left: 4px;}
     .xbulletin {
         padding: 18px 18px 0 18px;
     }
