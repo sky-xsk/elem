@@ -8,6 +8,13 @@
 
 现在的项目还有几个bug正在修复，本人会在空余时间修复bug的！
 
+![image](https://github.com/sky-xsk/elem/blob/master/images/1.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/2.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/3.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/4.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/5.png)
+
+
 ## Build Setup
 
 ``` bash
