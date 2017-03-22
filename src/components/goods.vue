@@ -4,7 +4,8 @@
            <ul>
               <li @click="selectMenu($index,$event)" v-for="(item,$index) in goods" class="menu-item"  :class="{'current':currentIndex === $index }">
                    <span class="textq">
-                       <span v-show="item.type>0" class="icon"></span>{{item.name}}
+                       <span v-show="item.type>0" class="iconbg" :class="classMap[item.type]"></span>
+                       {{item.name}}
                    </span>
                </li>
           </ul>
@@ -45,8 +46,6 @@
         <food :food="selectedFood" ref="foodd"></food>
   </div>
 
-     
-
 </template>
 
 <script>
@@ -78,7 +77,7 @@
         },
         computed: { //计算样式
             currentIndex() {
-                for (var i = 0; i < this.listheight; i++) {
+                for (var i = 0; i < this.listheight.length; i++) {
                     var height1 = this.listheight[i];
                     var height2 = this.listheight[i + 1];
                     if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
@@ -99,11 +98,11 @@
                 });
                 return foods;
             },
-
         },
 
         created() {
-            this.$http.get('/api/goods').then((response) => {
+             this.classMap = ["good_tese","good_discount"];
+             this.$http.get('/api/goods').then((response) => {
                 response = response.body;
                 if (response.errno === ERR_OK) {
                     this.goods = response.data;
@@ -167,13 +166,15 @@
 
 <style>
     /*从下网上看代码 1像素的暂时没有调整兼容性*/
-    
+    .iconbg{ display: block;}
+    .good_tese{background: #000; width: 10px; height: 10px;}
     .current {
         position: relative;
         margin-top: -1px;
         z-index: 10000;
         background: #fff;
         font-weight: 700;
+        border-left:3px solid rgb(0, 160, 220); 
     }
     
     .old {
