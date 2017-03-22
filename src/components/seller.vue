@@ -60,11 +60,11 @@
 
            <div class="pics">
              <h1 class="x_title">商家实景</h1>
-               <div class="pic-wrapper" ref="pic-wrapper">
-                <ul class="pic-list">
-                    <li class="pic-item" v-for="pic in seller.pics" ref='pic-list'> 
-                    <img :src="pic" width="120" height="90">
-                    </li>
+               <div class="pic-wrapper swiper-container">
+                <ul class="swiper-wrapper">
+                    <li v-for="pic in seller.pics"  class="swiper-slide"> 
+                        <img :src="pic" width="120" height="90">
+                    </li> 
                 </ul>
             </div>
         </div>
@@ -93,7 +93,7 @@
         props: {
             seller: {
                 type: Object,
-            }
+            },
         },
         data() {
             return {
@@ -105,19 +105,35 @@
 
         mounted() {
             this.initScroll();
+            this.swipers();
         },
 
         watch: {
             'seller' () {
                 this.initScroll();
+                this.swipers();
             }
         },
          computed: {
             favoriteText() {
                 return this.favorite ? '已收藏' : '收藏';
-            }
+            },
+            
          },
         methods: {
+           //图片滚动 
+            swipers(){
+                this.$nextTick(()=>{
+                     var swiper = new Swiper('.swiper-container', {
+                        pagination: '.swiper-pagination',
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                        freeMode: true,
+                    });
+                });
+            },
+
+
             initScroll() {
                 this.$nextTick(() => {
                     if (!this.scroll) {
@@ -134,16 +150,37 @@
             if (!event._constructed) {
                 return;
             }
-        this.favorite = !this.favorite;
-        saveToLocal(this.seller.id, 'favorite', this.favorite);
+            this.favorite = !this.favorite;
+            saveToLocal(this.seller.id, 'favorite', this.favorite);
+          }
       },
-
-     },
 
     }
 </script>
 
 <style>
+.swiper-container { }
+.swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        width: 120px; height: 90px; 
+        margin:0 5px 0 5px; 
+    }
     .xseller {
         position: absolute;
         top: 174px;

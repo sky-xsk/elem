@@ -41,7 +41,7 @@
             
             <split></split>
               <!--此处报错，问题还未解决,数据传输时显示未定义 :desc = "desc"-->
-            <ratingselect :selec-tType="selectType" :only-Content="onlyContent"  :ratings = "ratings"></ratingselect>    
+            <ratingselect :select-Type="selectType" :only-Content="onlyContent"  :ratings = "ratings" ></ratingselect>    
 
             <div class="rating-wrapperss">
                 <ul>
@@ -73,8 +73,7 @@
                     </li>
                 </ul>
             </div>
-            
-
+        
         </div>
     </div>
 </template>
@@ -109,13 +108,13 @@ const ALL = 2;
         
         methods:{
              needShow(type, text) {
-                if (this.onlyContent && !text) {
-                return false;
+                   if (this.onlyContent && !text) {
+                   return false;
                 }
-                if (this.selectType === ALL) {
-                return true;
+                    if (this.selectType === ALL) {
+                    return true;
                 } else {
-                return type === this.selectType;
+                    return type === this.selectType;
                 }
             },
         },
@@ -130,19 +129,19 @@ const ALL = 2;
         },
 
        events: {
-      'ratingtype.select'(type) {
-        this.selectType = type;
-        this.$nextTick(() => {
-          this.scroll.refresh();
-        });
+        'ratingtype.select'(type) {
+            this.selectType = type;
+            this.$nextTick(() => {
+            this.scroll.refresh();
+            });
       },
-      'content.toggle'(onlyContent) {
-        this.onlyContent = onlyContent;
-        this.$nextTick(() => {
-          this.scroll.refresh();
-        });
-      }
-    },
+        'content.toggle'(onlyContent) {
+            this.onlyContent = onlyContent;
+            this.$nextTick(() => {
+            this.scroll.refresh();
+            });
+        }
+      },
         created() {
             this.$http.get('/api/seller').then((response) => {
                 response = response.body;
