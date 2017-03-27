@@ -1,10 +1,19 @@
 # xsks
 
-> ele练习小项目
+> ele练习小项目 vue2.0写的哦！！！
 
 很适合新手练习的一个小项目，如果觉得还好的话就给个“star”吧！
 
 后期还会更新一些新的小练习的！
+
+现在的项目还有几个bug正在修复，本人会在空余时间修复bug的！
+
+![image](https://github.com/sky-xsk/elem/blob/master/images/1.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/2.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/3.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/4.png)
+![image](https://github.com/sky-xsk/elem/blob/master/images/5.png)
+
 
 ## Build Setup
 
