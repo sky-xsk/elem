@@ -9,10 +9,10 @@ Vue.use(Router)
 export default new Router({
     mode: 'hash',
     routes: [
-         {
+        {
             name: '/',
             path: '/',
-            component: goods
+            redirect: 'goods' //路由配置修改处，这样修改的原因是，当切换到默认的good组件下，高亮还是在的，重定向
         },
         {
             name: 'goods',
@@ -31,4 +31,3 @@ export default new Router({
         }
     ]
 });
-
