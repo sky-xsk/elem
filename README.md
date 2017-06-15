@@ -1,4 +1,4 @@
-#是vue2.0,不是vue1.0的开源小项目
+# xsks
 
 > ele练习小项目 vue2.0写的哦！！！
 
@@ -7,10 +7,6 @@
 后期还会更新一些新的小练习的！
 
 现在的项目还有几个bug正在修复，本人会在空余时间修复bug的！
-
-#bug详细：评价切换时出现报错
-
-一些图标本人还没做进去，为了美观，本人会抽时间开发进去！
 
 ![image](https://github.com/sky-xsk/elem/blob/master/images/1.png)
 ![image](https://github.com/sky-xsk/elem/blob/master/images/2.png)

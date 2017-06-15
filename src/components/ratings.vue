@@ -125,6 +125,7 @@ const ALL = 2;
                 ratings:[],  
                 selectType: ALL,
                 onlyContent: true,
+               
             }
         },
 
@@ -179,17 +180,17 @@ const ALL = 2;
    .fw_title{display: inline-block; font-size: 12px; color: rgb(7,17,27); vertical-align: top;}
    .fw_text{display: inline-block; margin-left: 5px;vertical-align: top; margin: 0 12px;}
    .deliveryTime{display: inline-block; font-size: 12px; line-height: 12px;  color: rgb(147,153,159);  vertical-align: top;margin-left: 5px;}
-  @media only screen and (max-width: 375px){
-     .overviewleft{flex: 0 0 120px; width: 120px;}
-     .overviewright{flex: 1;  padding: 6px 0 6px 18px}
-  }
+    @media only screen and (max-width: 375px){
+        .overviewleft{flex: 0 0 120px; width: 120px;}
+        .overviewright{flex: 1;  padding: 6px 0 6px 18px}
+    }
 
- @media only screen and (max-width: 320px){
-     .overviewleft{flex: 0 0 105px; width: 105px;}
-     .overviewright{flex: 1;  padding: 6px 0 6px 20px}
-     .ratrangk{line-height: 20px;}
-     .fw_title{padding-left:12px; }
-  }
+    @media only screen and (max-width: 320px){
+        .overviewleft{flex: 0 0 105px; width: 105px;}
+        .overviewright{flex: 1;  padding: 6px 0 6px 20px}
+        .ratrangk{line-height: 20px;}
+        .fw_title{padding-left:12px; }
+    }
   .rating-wrapperss{padding:0 18px;}
   .ratingitem{display: flex; border-bottom: 1px solid rgba(7,17,27,0.1);padding:18px 0;}
   .mavatar{ flex: 0 0 35px; margin-right: 12px;}

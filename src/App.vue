@@ -15,12 +15,10 @@
       </div>
 
       <div class="content">
-         <!--注意：这里使用了keep-alive后，会缓存不活动的组件实例，而不是销毁它们；简单的就这项目来说，当你在good组件添加商品后，
-         然后点击其他组件后，然后再返回good组件，添加的商品还是存在的，这就说明已经缓存了，并没有随着组件的切换，将其销毁-->
-         <keep-alive>
-            <router-view :seller="seller"></router-view>
-         </keep-alive>
-         
+        <!--添加keep-alive，保持状态-->
+        <keep-alive> 
+             <router-view :seller="seller"></router-view>
+        </keep-alive>
       </div>
   </div>
 </template>
@@ -73,14 +71,14 @@
     }
     
     .tab {
-        widows: 100%;
+        width: 100%;
         display: flex;
         height: 40px;
         line-height: 40px;
         position: relative;
     }
     
-    .tab:after {
+    .tab::after {
         content: '';
         position: absolute;
         left: 0;

@@ -1,7 +1,6 @@
 <template>
-    <transition name ="move">
-        <div v-show="showFlag" class="food" ref="foodwrapper">
-
+<transition name ="move">
+    <div v-show="showFlag" class="food" ref="foodwrapper">
              <div class="food-content">
                  <div class="image-header">
                      <img :src="food.image">
@@ -32,7 +31,7 @@
                    <h1 class="titlesf">商品信息</h1>
                    <p class="infofs">{{food.info}}</p>
               </div>   
-              
+             <!--组件-->    
              <split></split>  
 
              <div class="tatingfd infof">
@@ -52,13 +51,10 @@
                         </ul>
                         <div class="no-rating" v-show="!food.rating || food.rating.length">暂无评价</div>
                   </div>  
-
              </div>
-    
-               
-            </div>
         </div>
-    </transition>
+     </div>
+</transition>
 </template>
 
 <script>
@@ -155,9 +151,6 @@
 
     }
 </script>
-
-
-
 <style>
     .ratingli-wrapper{
         padding: 0 18px;
